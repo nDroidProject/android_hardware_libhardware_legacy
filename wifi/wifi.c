@@ -77,6 +77,8 @@ static const char MODULE_FILE[]         = "/proc/modules";
 
 static int insmod(const char *filename, const char *args)
 {
+    return 0;
+    /*
     void *module;
     unsigned int size;
     int ret;
@@ -90,10 +92,13 @@ static int insmod(const char *filename, const char *args)
     free(module);
 
     return ret;
+     */
 }
 
 static int rmmod(const char *modname)
 {
+    return 0;
+    /*
     int ret = -1;
     int maxtry = 10;
 
@@ -109,6 +114,7 @@ static int rmmod(const char *modname)
         LOGD("Unable to unload driver module \"%s\": %s\n",
              modname, strerror(errno));
     return ret;
+     */
 }
 
 int do_dhcp_request(int *ipaddr, int *gateway, int *mask,
@@ -134,20 +140,24 @@ const char *get_dhcp_error_string() {
 }
 
 static int check_driver_loaded() {
+    return 0;
+    /*
     char driver_status[PROPERTY_VALUE_MAX];
     FILE *proc;
     char line[sizeof(DRIVER_MODULE_TAG)+10];
 
     if (!property_get(DRIVER_PROP_NAME, driver_status, NULL)
             || strcmp(driver_status, "ok") != 0) {
-        return 0;  /* driver not loaded */
+        return 0;  // driver not loaded
     }
+     */
     /*
      * If the property says the driver is loaded, check to
      * make sure that the property setting isn't just left
      * over from a previous manual shutdown or a runtime
      * crash.
      */
+    /*
     if ((proc = fopen(MODULE_FILE, "r")) == NULL) {
         LOGW("Could not open %s: %s", MODULE_FILE, strerror(errno));
         property_set(DRIVER_PROP_NAME, "unloaded");
@@ -162,6 +172,7 @@ static int check_driver_loaded() {
     fclose(proc);
     property_set(DRIVER_PROP_NAME, "unloaded");
     return 0;
+     */
 }
 
 int wifi_load_driver()
